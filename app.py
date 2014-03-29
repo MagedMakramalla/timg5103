@@ -7,7 +7,7 @@ import sys
 
 def hello():
     print "test"    
-    resp = requests.get('http://127.0.0.1:8000/listUsers')    
+    resp = requests.get('http://127.0.0.1:8005/listUsers')    
     return json.dumps({'status':'healthy'})
 
 
@@ -15,7 +15,7 @@ def hello():
 import requests
  
 def get_user(name):
-    resp = requests.get('http://127.0.0.1:8000/getUser?username=%s' % (name))        
+    resp = requests.get('http://127.0.0.1:8005/getUser?username=%s' % (name))        
     resp_data = resp.json()['user']
     print resp_data
     return resp_data
