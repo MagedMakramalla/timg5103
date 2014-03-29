@@ -9,3 +9,8 @@ import app
 @server.route('/')
 def hello_world():
     return app.hello()
+
+
+@server.route('/find')
+def find_connection():
+    return app.find_connection()

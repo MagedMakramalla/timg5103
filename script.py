@@ -3,17 +3,14 @@ import sys
 import requests
  
 def get_user(name):
-    resp = requests.get('http://127.0.0.1:9010/getUser?username=%s' % (name))
-        
+    resp = requests.get('http://127.0.0.1:9010/getUser?username=%s' % (name))        
     resp_data = resp.json()
     return resp_data
 
 
 
-def find_connection():
+def find_connection(user,desired_contact):
         
-    user = 'vignesh'
-    desired_contact = 'asdsad'
     look_up_in = user
     
     i = 0       
@@ -24,13 +21,13 @@ def find_connection():
     
     while not found:        
         user_data = get_user(look_up_in)            
-        for each_connection in user_data['connections']:            
-            if each_connection['name'] == desired_contact:
+        for each_connection in user_data['following']:            
+            if each_connection['username'] == desired_contact:
                 found = True
                 break        
             i += 1        
         if not found:
-            look_up_in = user_data['connections'][0]['name']
+            look_up_in = user_data['following'][0]['username']
             contacts_in_link.append(look_up_in)
             degree_of_seperation += 1
         if i >= stopping_value:
@@ -46,6 +43,9 @@ def find_connection():
     else:
         print 'no connection found' 
      
+
+user = 'vignesh'
+desired_contact = 'asdsad'
          
-find_connection()
+find_connection(user,desired_contact)
 
